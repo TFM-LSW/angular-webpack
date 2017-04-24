@@ -8,7 +8,9 @@ if (process.env.ENV === 'build') {
 }
 
 export function main() {
-  return platformBrowserDynamic().bootstrapModule(AppModule);
+  return platformBrowserDynamic().bootstrapModule(AppModule)
+    .then(success => console.log(`Bootstrap success: ${success}`))
+    .catch(err => console.error(err));
 }
 
 if (document.readyState === 'complete') {
