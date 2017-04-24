@@ -59,7 +59,7 @@ module.exports = function makeWebpackConfig() {
    */
   config.output = isTest ? {} : {
     path: root('dist'),
-    publicPath: isProd ? '/' : 'http://localhost:8080/',
+    publicPath: isProd ? '/' : 'http://localhost:3000/',
     filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',
     chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
   };
@@ -71,6 +71,11 @@ module.exports = function makeWebpackConfig() {
   config.resolve = {
     // only discover files that have those extensions
     extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+    alias: {
+      // deal with TimelineMax not resolving its own TweenLite references! (LSW)
+      // Reference: https://greensock.com/forums/topic/14873-gsap-npmwebpack-import-for-scrolltoplugin/
+      'TweenLite': 'gsap/src/minified/TweenLite.min'
+    }
   };
 
   var atlOptions = '';
