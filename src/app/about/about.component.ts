@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'my-about',
@@ -7,12 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() {
-    // Do stuff
+  constructor(@Inject('config') private config) {
+    console.log('config: ' + this.config);
   }
 
   ngOnInit() {
     console.log('Hello About');
   }
-
 }

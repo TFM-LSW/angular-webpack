@@ -29,7 +29,14 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     AboutComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    {
+      provide: 'config',
+      useValue: {
+        title: 'Angular 4.0.3',
+        api: 'http://go'
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
