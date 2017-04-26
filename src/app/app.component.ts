@@ -11,7 +11,7 @@ import '../style/app.scss';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy, Input {
-  url = 'https://github.com/preboot/angular2-webpack';
+  url = 'https://github.com/TFM-LSW/angular-webpack';
   title: string;
   tally = 1;
 

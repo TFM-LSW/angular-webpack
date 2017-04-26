@@ -1,5 +1,6 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 
+
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 @NgModule({
@@ -18,7 +20,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     CoreModule,
     HttpModule,
     FormsModule,
-    routing
+    routing,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
