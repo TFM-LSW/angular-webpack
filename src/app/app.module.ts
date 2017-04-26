@@ -33,7 +33,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     {
       provide: 'config',
       useValue: {
-        title: 'Angular 4.0.3',
+        title: 'Angular 4.1.0-rc.0',
         api: 'http://go'
       }
     }
