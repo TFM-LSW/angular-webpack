@@ -1,3 +1,6 @@
+@import "../../node_modules/bootstrap/scss/bootstrap-reboot";
+@import "./vendor/bootstrap-grid-custom";
+
 // styles in src/style directory are applied to the whole page
 body {
     background: #333;

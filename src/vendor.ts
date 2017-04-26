@@ -15,5 +15,5 @@ import '@angularclass/hmr';
 // import 'gsap/src/minified/TweenLite.min.js';
 // import 'gsap/src/minified/TweenMax.min.js';
 // import 'gsap/src/minified/TimelineMax.min.js';
-import 'bootstrap/dist/css/bootstrap-reboot.min.css';
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
+// import 'bootstrap/dist/css/bootstrap-reboot.min.css';
+// import 'bootstrap/dist/css/bootstrap-grid.min.css';
