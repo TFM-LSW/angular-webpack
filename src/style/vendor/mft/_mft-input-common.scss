@@ -1,0 +1,36 @@
+@import "../variables";
+
+$mom-font-family-titles: $font-family-titles;
+$mom-font-family-body: $font-family-body;
+$colour-selected: #007987;
+$colour-deselected: #999999;
+$colour-grey-lighter: #999999;
+$colour-grey: #666666;
+$colour-label-blue: #162b48;
+$colour-primary-blue: #162b48;
+$colour-secondary-red: #E01B22;
+$colour-secondary-red--hover: $colour-primary-blue;
+
+$colour-input-green: #487F88;
+
+$mom-cal__label: #666666;
+$mom-cal__label--value: #999999;
+
+/*
+    Mixins
+*/
+@mixin mom-handheld {
+  @media (min-width: 400px) { @content; }
+}
+@mixin mom-tablet {
+  @media (min-width: 768px) { @content; }
+}
+@mixin mom-tablet-horizontal {
+  @media (min-width: 992px) { @content; }
+}
+@mixin mom-desktop {
+  @media (min-width: 1025px) { @content; }
+}
+@mixin mom-desktop-large {
+  @media (min-width: 1200px) { @content; }
+}

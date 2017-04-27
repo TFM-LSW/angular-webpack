@@ -2,7 +2,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreModule }    from './core/core.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     CoreModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     routing,
     BrowserAnimationsModule,
     AppDomLibModule

@@ -1,19 +1,7 @@
-<!--<span className="mom-range-slider__container">
-  <input
-  ref={'MOMRangeField'}
-  type="range"
-  className={this.props.className}
-  style={bgStyle}
-  min={this.props.min}
-  max={this.props.max}
-  step={this.props.step}
-  value={this.props.value}
-  onChange={e => this.props.onChange(parseFloat(e.target.value))}
-  onInput={e => this.props.onChange(parseFloat(e.target.value))}
-  onMouseUp={e => { if (this.state.ie) this.props.onChange(parseFloat(e.target.value)); }} // added for IE Browser
-  onTouchEnd={e => this.props.onChange(parseFloat(e.target.value))} // added for touchscreens
-  onTouchStart={e => this.handleTap(e)}
-/>
-{{increments }}
-</span>-->
-<p>range input here</p>
+<input
+  type="range" 
+  [formControl]="rangeControl"
+  min="0" 
+  max="20" 
+  step="1" 
+>
