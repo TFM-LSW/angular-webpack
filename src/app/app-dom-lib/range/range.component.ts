@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { FormControl } from '@angular/forms';
 
@@ -7,24 +7,24 @@ import { FormControl } from '@angular/forms';
   templateUrl: './range.component.html',
   styleUrls: ['./range.component.scss']
 })
-export class RangeComponent implements OnInit, OnDestroy {
-  rangeControl = new FormControl();
-  webkitBackgroundSize: any;
-
+export class RangeComponent implements OnInit, OnDestroy, OnChanges {
   @Input() min = 0;
   @Input() max = 20;
   @Input() step = 10;
-  @Input() value = 8;
-  @Input() increments = {};
+  @Input() value;
+  @Input() increments;
   @ViewChild('MFTRangeField') rangeField;
   @Output() rangeChange = new EventEmitter<any>();
 
-  private subscription: ISubscription;
+  rangeControl = new FormControl();
+  webkitBackgroundSize: any;
+  incrementArray = this.increments;
 
+  private subscription: ISubscription;
   constructor() { }
 
   setWebkitTrack(value) {
-    this.webkitBackgroundSize = (parseFloat(value) - this.min) * 100 / (this.max - this.min) + '% 100%';
+    this.webkitBackgroundSize = (value - this.min) * 100 / (this.max - this.min) + '% 100%';
   }
 
   getOffset(el, relativeToViewPort = false) {
@@ -42,45 +42,48 @@ export class RangeComponent implements OnInit, OnDestroy {
     };
   }
 
+  setValue(value) {
+    this.value = Math.round(value);
+    this.rangeChange.emit(this.value);
+    this.setWebkitTrack(this.value);
+  }
+
+  getIncArr = () => {
+    const createArr = (min: number, max: number) => {
+      const incArr = [];
+      for (let index: any = min; index <= max; index++) {
+        incArr.push(index);
+      }
+      return incArr;
+    };
+    if (typeof this.increments === 'string') {
+      const tmpArr = this.increments.split('-');
+      return createArr(Number(tmpArr[0]), Number(tmpArr[1]));
+    } else if (typeof this.increments === 'boolean') {
+      return createArr(this.min, this.max);
+    } else {
+      return this.increments;
+    }
+  }
+
   @HostListener('touchstart', ['$event'])
   handleTouchStart(e: TouchEvent) {
     const offset = this.getOffset(this.rangeField.nativeElement);
     const diffXPixels = e.touches[0].pageX - offset.x;
     const diffXValue = (diffXPixels / this.rangeField.nativeElement.clientWidth) * (this.max - this.min);
-    this.value = Math.round(diffXValue);
-    this.rangeChange.emit(this.value);
-    this.setWebkitTrack(this.value);
+    this.setValue(diffXValue);
   }
-
-  /*@HostListener('touchend', ['$event'])
-  handleTouchEnd() {
-    console.log(this.rangeField.nativeElement.value);
-    this.value = this.rangeField.nativeElement.value;
-    //this.rangeChange.emit(Math.round(e.target.value));
-  }*/
-
-  /*@Output() changeFun = function(e) {
-    console.log('changeFun' + e.target.value);
-  }*/
-
-  getIncArr = () => {
-    if (typeof this.increments === 'string') {
-      const tmpArr = this.increments.split('-');
-      const incArr = [];
-      for (let index: any = tmpArr[0]; index <= tmpArr[1]; index++) {
-        incArr.push(index);
-      }
-      return incArr;
-    } else {
-      return this.increments;
-    }
-  };
 
   ngOnInit() {
     this.subscription = this.rangeControl.valueChanges.subscribe(value => {
       this.rangeChange.emit(value);
       this.setWebkitTrack(value);
     });
+    this.setWebkitTrack(this.value);
+    this.incrementArray = this.getIncArr();
+  }
+  ngOnChanges() {
+    this.rangeChange.emit(this.value);
     this.setWebkitTrack(this.value);
   }
 
