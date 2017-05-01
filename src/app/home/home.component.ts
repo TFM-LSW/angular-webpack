@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   parentHandler(value) {
     this.dataObj.rangeValue = value;
-    this.updateScore()
+    this.updateScore();
   }
 
   constructor() {}
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   testAnimation() {
-    this.timeline.to(this.dataObj, 1, {
+    this.timeline.to(this.dataObj, 0.4, {
       rangeValue: 28, ease: Sine.easeOut, onUpdate: () => this.updateScore(),
       delay: 1
     }, 0);

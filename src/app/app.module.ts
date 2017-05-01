@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
 import { AppDomLibModule } from './app-dom-lib/app-dom-lib.module';
+import { HomeRangeComponent } from './home/home.range.component';
 
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -29,7 +30,8 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    HomeRangeComponent
   ],
   providers: [
     ApiService,
