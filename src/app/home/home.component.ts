@@ -7,20 +7,19 @@ import 'gsap';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  dataObj = { rangeValue: 3 };
+  dataObj = { rangeValue: 4 };
   timeline = new TimelineMax();
   rangeValue: number;
-  tweenText = { text: '3' };
+  // tweenText = { text: '4' };
 
   parentHandler(value) {
     this.dataObj.rangeValue = value;
-    this.updateScore();
   }
 
   constructor() {}
 
   updateScore() {
-    TweenMax.set(this.tweenText, { text: String(Math.round(this.dataObj.rangeValue))});
+    // TweenMax.set(this.tweenText, { text: String(Math.round(this.dataObj.rangeValue))});
   }
 
   testAnimation() {

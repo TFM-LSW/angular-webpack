@@ -15,7 +15,7 @@ export class RangeComponent implements OnInit, OnDestroy, OnChanges {
   @Input() increments;
   @ViewChild('MFTRange') rangeField;
   @Output() rangeChange = new EventEmitter<any>();
-  
+
   private subscription: ISubscription;
   private rangeControl = new FormControl();
   private webkitBackgroundSize: any;

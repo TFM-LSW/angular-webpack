@@ -7,6 +7,6 @@
     [increments]="true"
     [value]="dataObj.rangeValue"
   ></my-range-ext>
-  {{ tweenText.text }}
+  {{ dataObj.rangeValue | number: '1.0-0' }}
 </content>
 
