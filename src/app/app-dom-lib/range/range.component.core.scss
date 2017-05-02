@@ -1,0 +1,169 @@
+/*:host {
+  
+}*/
+
+$colour-range-input-handle: #e11b22;
+$colour-range-input-track: #e11b22;
+$colour-range-hover: #b01116;
+$colour-thumb-outline: #333;
+$range-track-height: 2px;
+$range-thumb-height: 20px;
+$range-thumb-border-width: 4px;
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 15px 0;
+  padding: 0;
+  height: 30px;// default size for non-webkit browsers
+  border: none;
+  
+  // Hacky solution to most effieciently target Webkit only (webkit by default includes Edge, unfortunetly)...
+  @supports not(-ms-ime-align:auto) {
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+      -webkit-height: $range-track-height;
+      height: $range-track-height;
+      background-color: #CCCCCC;
+      background-image: linear-gradient($colour-range-input-track, $colour-range-input-track);
+      background-size: 50% 100%;
+      background-repeat: no-repeat;
+      border-radius: 10px;
+      &:focus {
+        background-image: linear-gradient($colour-range-hover, $colour-range-hover);
+        //background-image: linear-gradient(45deg, #043564, rgb(58, 125, 218));
+      }
+    }
+  }
+}
+input[type=range]:focus {
+  outline: none;
+}
+
+/*
+  WEBKIT
+*/
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 0px solid rgba(1, 1, 1, 0);
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  cursor: pointer;
+  border: $range-thumb-border-width solid $colour-thumb-outline;
+  height: $range-thumb-height;
+  width: $range-thumb-height;
+  border-radius: $range-thumb-height;
+  background: $colour-range-input-handle;
+  margin-top: 0px;
+  transition: all 1s;
+}
+input[type=range]:focus::-webkit-slider-thumb {
+  background: $colour-range-hover;
+}
+input[type=range]:focus::-webkit-slider-thumb {
+  background: $colour-range-hover;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  //background: rgb(58, 125, 218);
+}
+
+
+
+/*
+  MOZ
+*/
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: $range-track-height;
+  cursor: pointer;
+  //box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: #CCCCCC;
+  border-radius: $range-track-height;
+  //border: 0px solid rgba(0, 0, 0, 0);
+}
+input[type=range]::-moz-range-progress {
+  background: $colour-range-input-track;
+  height: $range-track-height;
+  border-radius: $range-track-height;
+}
+input[type=range]::-moz-range-thumb {
+  cursor: pointer;
+  border: $range-thumb-border-width solid $colour-thumb-outline;
+  height: $range-thumb-height/1.5;
+  width: $range-thumb-height/1.5;
+  border-radius: $range-thumb-height/1.5;
+  background: $colour-range-input-handle;
+  margin-top: 0px;
+}
+
+
+/*
+  IE
+*/
+input[type=range]::-ms-track {
+  width: 100%;
+  height: $range-track-height;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: $colour-range-input-track;
+  border-radius: $range-track-height;
+}
+input[type=range]::-ms-fill-upper {
+  background: #CCCCCC;
+  border-radius: $range-track-height;
+}
+input[type=range]::-ms-thumb {
+  cursor: pointer;
+  border: 4px solid $colour-thumb-outline;
+  height: $range-thumb-height/1.5;
+  width: $range-thumb-height/1.5;
+  border-radius: $range-thumb-height/1.5;
+  background: $colour-range-input-handle;
+  margin-top: 0px;
+}
+input[type=range]:focus::-ms-thumb {
+  background: $colour-range-hover;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: $colour-range-hover;
+}
+input[type=range]:focus::-ms-fill-upper {
+  
+}
+
+
+.mom-range-slider__increments {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  small {
+    display: block;
+    color: #999;
+    text-align: center;
+    cursor: pointer;
+    //padding: 5px;
+    min-width: 0px;
+    text-align: center;
+    font-size: 13px;
+    min-width: 20px;
+  }
+
+  /*@include sh-tablet {
+    small {
+      min-width: 37px;
+      padding: 10px;
+      font-size: 14px;
+    }
+  }*/
+  &--selected {
+    color: $colour-range-input-handle!important;
+  }
+}
