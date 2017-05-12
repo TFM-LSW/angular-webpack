@@ -1,3 +1,49 @@
 // -----------------------------------------------------------------------------
 // This file contains all @font-face declarations, if any.
 // -----------------------------------------------------------------------------
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+// @charset "UTF-8";
+
+@font-face {
+  font-family: "DIN-Web";
+  src: url("~/fonts/din/DIN-Regular.eot?v=1.0");
+  src: url("~/fonts/din/DIN-Regular.eot?v=1.0#iefix") format("embedded-opentype"),
+  url("~/fonts/din/DIN-Regular.ttf?v=1.0") format("truetype"),
+  url("~/fonts/din/DIN-Regular.woff?v=1.0") format("woff"),
+  url("~/fonts/din/DIN-Regular.svg?v=1.0#Ionicons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DIN-Web";
+  src: url("~/fonts/din/DIN-Light.eot?v=1.0");
+  src: url("~/fonts/din/DIN-Light.eot?v=1.0#iefix") format("embedded-opentype"),
+  url("~/fonts/din/DIN-Light.ttf?v=1.0") format("truetype"),
+  url("~/fonts/din/DIN-Light.woff?v=1.0") format("woff"),
+  url("~/fonts/din/DIN-Light.svg?v=1.0#Ionicons") format("svg");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DIN-Web";
+  src: url("~/fonts/din/DIN-Medium.eot?v=1.0");
+  src: url("~/fonts/din/DIN-Medium.eot?v=1.0#iefix") format("embedded-opentype"),
+  url("~/fonts/din/DIN-Medium.ttf?v=1.0") format("truetype"),
+  url("~/fonts/din/DIN-Medium.woff?v=1.0") format("woff"),
+  url("~/fonts/din/DIN-Medium.svg?v=1.0#Ionicons") format("svg");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DIN-Web";
+  src: url("~/fonts/din/DIN-Bold.eot?v=1.0");
+  src: url("~/fonts/din/DIN-Bold.eot?v=1.0#iefix") format("embedded-opentype"),
+  url("~/fonts/din/DIN-Bold.ttf?v=1.0") format("truetype"),
+  url("~/fonts/din/DIN-Bold.woff?v=1.0") format("woff"),
+  url("~/fonts/din/DIN-Bold.svg?v=1.0#Ionicons") format("svg");
+  font-weight: 700;
+  font-style: normal;
+}

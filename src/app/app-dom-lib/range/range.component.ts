@@ -23,7 +23,7 @@ export class RangeComponent implements OnInit, OnDestroy, OnChanges {
   constructor() { }
 
   @HostListener('touchstart', ['$event'])
-  handleTouchStart(e: TouchEvent) {
+  handleTouchStart(e: any) {
     const offset = this.getOffset(this.rangeField.nativeElement);
     const diffXPixels = e.touches[0].pageX - offset.x;
     const diffXValue = (diffXPixels / this.rangeField.nativeElement.clientWidth) * (this.max - this.min);
