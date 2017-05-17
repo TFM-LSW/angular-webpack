@@ -7,5 +7,6 @@
   max={{max}}
   step={{step}}
   value={{value}}
+  (touchstart)="handleTouchStart($event)"
   >
 <div *ngIf="increments" class="mom-range-slider__increments"><small *ngFor="let inc of incrementArray" (click)="setValue(inc)" class="mom-range-slider__increments--selected">{{inc}}</small></div>

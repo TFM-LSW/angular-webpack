@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { FormControl } from '@angular/forms';
 
@@ -8,12 +8,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./range.component.scss']
 })
 export class RangeComponent implements OnInit, OnDestroy, OnChanges {
+  @ViewChild('MFTRange') rangeField;
   @Input() min = 0;
   @Input() max = 20;
   @Input() step = 10;
   @Input() value;
   @Input() increments;
-  @ViewChild('MFTRange') rangeField;
   @Output() rangeChange = new EventEmitter<any>();
 
   private subscription: ISubscription;
@@ -22,14 +22,12 @@ export class RangeComponent implements OnInit, OnDestroy, OnChanges {
   private incrementArray = this.increments;
   constructor() { }
 
-  @HostListener('touchstart', ['$event'])
-  handleTouchStart(e: any) {
+  handleTouchStart(e: TouchEvent) {
     const offset = this.getOffset(this.rangeField.nativeElement);
     const diffXPixels = e.touches[0].pageX - offset.x;
     const diffXValue = (diffXPixels / this.rangeField.nativeElement.clientWidth) * (this.max - this.min);
     this.setValue(diffXValue);
   }
-
   ngOnInit() {
     this.subscription = this.rangeControl.valueChanges.subscribe(value => {
       this.rangeChange.emit(value);
@@ -42,7 +40,6 @@ export class RangeComponent implements OnInit, OnDestroy, OnChanges {
     this.rangeChange.emit(this.value);
     this.setWebkitTrack(this.value);
   }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
