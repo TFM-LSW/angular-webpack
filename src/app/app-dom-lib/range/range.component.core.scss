@@ -139,10 +139,11 @@ input[type=range]:focus::-ms-fill-upper {
 
 
 .mom-range-slider__increments {
-  width: 100%;
+  //width: 100%;
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 10px;
 
   small {
     display: block;
@@ -152,8 +153,8 @@ input[type=range]:focus::-ms-fill-upper {
     //padding: 5px;
     min-width: 0px;
     text-align: center;
-    font-size: 13px;
-    min-width: 20px;
+    font-size: 14px;
+    min-width: 1.2em;
   }
 
   /*@include sh-tablet {
