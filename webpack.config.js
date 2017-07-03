@@ -8,8 +8,6 @@ var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ngcWebpack = require('ngc-webpack');
-// var CompressionPlugin = require('compression-webpack-plugin');
 
 /**
  * Env
@@ -48,12 +46,11 @@ module.exports = function makeWebpackConfig() {
      * Entry
      * Reference: http://webpack.github.io/docs/configuration.html#entry
      */
-    config.entry = isTest ? {} : {
+    config.entry = {
       'polyfills': './src/polyfills.ts',
       'vendor': './src/vendor.ts',
-      'app': !isProd ? './src/main.ts' : './src/main-aot.ts' // our angular app
+      'app': './src/main.ts' // our angular app
     };
-    console.log(config.entry.app);
   }
 
   /**
@@ -98,21 +95,7 @@ module.exports = function makeWebpackConfig() {
       // Support for .ts files.
       {
         test: /\.ts$/,
-        use: [
-          {
-            loader: '@angularclass/hmr-loader',
-            options: {
-              pretty: !isProd,
-              prod: isProd
-            }
-          },
-          {
-            loader: 'awesome-typescript-loader?' + atlOptions
-          },
-          {
-            loader: 'angular2-template-loader'
-          }
-        ],
+        loaders: ['awesome-typescript-loader?' + atlOptions, 'angular2-template-loader', '@angularclass/hmr-loader'],
         exclude: [isTest ? /\.(e2e)\.ts$/ : /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/]
       },
 
@@ -131,7 +114,7 @@ module.exports = function makeWebpackConfig() {
       {
         test: /\.css$/,
         exclude: root('src', 'app'),
-        loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader']})
+        loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']})
       },
       // all css required in src/app files will be merged in js files
       {test: /\.css$/, include: root('src', 'app'), loader: 'raw-loader!postcss-loader'},
@@ -145,8 +128,23 @@ module.exports = function makeWebpackConfig() {
         loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'postcss-loader', 'sass-loader']})
       },
       // all css required in src/app files will be merged in js files
-      {test: /\.(scss|sass)$/, exclude: root('src', 'style'), loader: 'raw-loader!postcss-loader!sass-loader'},
-
+      {
+        test: /\.(scss|sass)$/, exclude: root('src', 'style'), use: [{
+          loader: 'raw-loader'
+        },
+        {
+          loader: 'postcss-loader'
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            data: '@import "variables";',
+            includePaths: [
+              root('src', 'style', 'abstracts')
+            ]
+          }
+        }]
+      },
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
       {test: /\.html$/, loader: 'raw-loader',  exclude: root('src', 'public')}
@@ -230,6 +228,9 @@ module.exports = function makeWebpackConfig() {
 
   if (!isTest && !isTestWatch) {
     config.plugins.push(
+      // Generate common chunks if necessary
+      // Reference: https://webpack.github.io/docs/code-splitting.html
+      // Reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
       new CommonsChunkPlugin({
         name: ['vendor', 'polyfills']
       }),
@@ -245,7 +246,6 @@ module.exports = function makeWebpackConfig() {
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Disabled when in test mode or not in build mode
       new ExtractTextPlugin({filename: 'css/[name].[hash].css', disable: !isProd})
-
     );
   }
 
@@ -256,35 +256,19 @@ module.exports = function makeWebpackConfig() {
       // Only emit files when there are no errors
       new webpack.NoEmitOnErrorsPlugin(),
 
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-      }),
-
       // // Reference: http://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
       // // Dedupe modules in the output
       // new webpack.optimize.DedupePlugin(),
 
       // Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
       // Minify all javascript, switch loaders to minimizing mode
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: false, 
-        mangle: { keep_fnames: true }
-      }),
-      // new CompressionPlugin({
-      //  regExp: /\.css$|\.html$|\.js$|\.map$/,
-      // threshold: 2 * 1024
-      // }),
+      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }}),
 
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
         from: root('src/public')
-      }]),
-
-      new ngcWebpack.NgcWebpackPlugin({
-        tsConfig: './tsconfig.json'
-      })
+      }])
     );
   }
 
@@ -296,7 +280,7 @@ module.exports = function makeWebpackConfig() {
   config.devServer = {
     contentBase: './src/public',
     historyApiFallback: true,
-    quiet: true, 
+    quiet: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
   };
 

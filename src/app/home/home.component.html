@@ -1,3 +1,12 @@
-<p>
-  Home Works!
-</p>
+<content>
+  <my-range-ext
+    min="1"
+    max="30"
+    step="1"
+    (rangeChange)="parentHandler($event)"
+    [increments]="true"
+    [value]="dataObj.rangeValue"
+  ></my-range-ext>
+  <!--{{ dataObj.rangeValue | number: '1.0-0' }}-->
+</content>
+

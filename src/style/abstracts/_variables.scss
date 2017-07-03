@@ -1,10 +1,35 @@
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
+$brand-color: #e11b22 !default;
+$brand-color--blue: #003366 !default;
+$brand-color--red: #e11b22 !default;
+
+$brand-color--grey-dark: #333 !default;
+$brand-color--grey-dark-mid: #666 !default;
+$brand-color--grey-light-mid: #999 !default;
+$brand-color--grey-light: #CCC !default;
+
+$brand-color-secondary--blue: #4F87C6 !default;
+$brand-color-secondary--teal: #008289 !default;
+$brand-color-secondary--purple: #6C1B73 !default;
+$brand-color-secondary--orange: #F37320 !default;
+$brand-color-secondary--lime: #B4D333 !default;
+$brand-color-secondary--burgundy: #B01116 !default;
+$brand-color-secondary--vanilla: #FED967 !default;
+
+$font-family-sans-serif: "Helvetica Neue", 'Open Sans', Arial, Helvetica, sans-serif;
+$font-family-titles: "DIN-Web", "Helvetica Neue", 'Open Sans', Helvetica, sans-serif;
+$font-family-body: "Helvetica Neue", 'Open Sans', Helvetica, sans-serif;
+$font-family-nav: "DIN-Web", "Helvetica Neue", 'Open Sans', Helvetica, sans-serif;
+$font-family-serif: "Helvetica Neue", 'Open Sans', Helvetica, sans-serif;
+$font-size-base: 18px;
+$font-size-base-number: 14;
 
 
-
-
+// set up core component defaults
+$mft-header-font-family-titles: $font-family-titles;
+$mft-nav-title-font-family: $font-family-titles;
 
 /// Regular font family
 /// @type List
@@ -13,34 +38,6 @@ $text-font-stack: 'Open Sans', 'Helvetica Neue Light', 'Helvetica Neue', 'Helvet
 /// Code (monospace) font family
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
-
-
-
-
-
-/// Copy text color
-/// @type Color
-$text-color: rgb(34, 34, 34) !default;
-
-/// Main brand color
-/// @type Color
-$brand-color: rgb(229, 0, 80) !default;
-
-/// Light grey
-/// @type Color
-$light-grey: rgb(237, 237, 237) !default;
-
-/// Medium grey
-/// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
-
-/// Dark grey
-/// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
-
-
-
-
 
 /// Container's maximum width
 /// @type Length

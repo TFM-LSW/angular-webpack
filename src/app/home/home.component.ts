@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import 'gsap';
 
 @Component({
   selector: 'my-home',
@@ -6,13 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  dataObj = { rangeValue: 4 };
+  timeline = new TimelineMax();
+  rangeValue: number;
+  // tweenText = { text: '4' };
 
-  constructor() {
-    // Do stuff
+  parentHandler(value) {
+    this.dataObj.rangeValue = value;
+  }
+
+  constructor() {}
+
+  updateScore() {
+    // TweenMax.set(this.tweenText, { text: String(Math.round(this.dataObj.rangeValue))});
+  }
+
+  testAnimation() {
+    this.timeline.to(this.dataObj, 0.4, {
+      rangeValue: 28, ease: Sine.easeOut, onUpdate: () => this.updateScore(),
+      delay: 1
+    }, 0);
   }
 
   ngOnInit() {
-    console.log('Hello Home');
+    setTimeout(() => { this.testAnimation(); }, 1000);
   }
-
 }

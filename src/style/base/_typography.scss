@@ -2,6 +2,32 @@
  * Basic typography style for copy text
  */
 body {
-  color: $text-color;
   font: normal 125% / 1.4 $text-font-stack;
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $brand-color--red;
+  text-decoration: none;
+  font-size: 1em;
+
+  @include on-event {
+    // color: $text-color;
+    text-decoration: underline;
+  }
+  &:hover {
+    color: $brand-color-secondary--blue;
+  }
+}
+
+h1 {
+  color: $brand-color--grey-dark;
+  font-family: $font-family-titles;
+  font-size: 2em;
+  font-weight: 300;
+  text-align: left;
+  letter-spacing: -0.03em;
+  margin-bottom: 1em;
 }

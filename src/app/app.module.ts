@@ -2,7 +2,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CoreModule }    from './core/core.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
+import { AppDomLibModule } from './app-dom-lib/app-dom-lib.module';
+import { HomeRangeComponent } from './home/home.range.component';
 
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
@@ -20,20 +22,23 @@ import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
     CoreModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     routing,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppDomLibModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    HomeRangeComponent
   ],
   providers: [
     ApiService,
     {
       provide: 'config',
       useValue: {
-        title: 'Angular 4.0.3',
+        title: 'Angular 4.1.0',
         api: 'http://go'
       }
     }
